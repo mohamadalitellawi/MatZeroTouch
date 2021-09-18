@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <DocumentationFile>bin\Debug\MatZeroTouch.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,5 +46,29 @@
     <Compile Include="HelloWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="pkg.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <!--Copy the package to the Dynamo package root directory-->
+    <GetReferenceAssemblyPaths TargetFrameworkMoniker=".NETFramework, Version=v2.0">
+      <Output TaskParameter="FullFrameworkReferenceAssemblyPaths" PropertyName="FrameworkAssembliesPath" />
+    </GetReferenceAssemblyPaths>
+    <GetAssemblyIdentity AssemblyFiles="$(OutDir)$(TargetName).dll">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyInfo" />
+    </GetAssemblyIdentity>
+    <ItemGroup>
+      <SourceDlls Include="$(TargetDir)*.dll" />
+      <SourcePdbs Include="$(TargetDir)*.pdb" />
+      <SourcePdbs Include="$(TargetDir)*.pdb" />
+      <SourceXmls Include="$(TargetDir)*.xml" />
+      <SourcePkg Include="pkg.json" />
+    </ItemGroup>
+    <RemoveDir Directories="$(AppData)\Dynamo\Dynamo Revit\2.0\packages\$(ProjectName)\bin" />
+    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\1.3\packages\$(ProjectName)\bin\%(RecursiveDir)" />
+    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\1.3\packages\$(ProjectName)\" />
+    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\1.3\packages\$(ProjectName)\bin\" />
+    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\1.3\packages\$(ProjectName)\bin\" />
+  </Target>
 </Project>

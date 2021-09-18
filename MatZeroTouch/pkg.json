@@ -1,0 +1,20 @@
+{
+  "license": "MIT",
+  "file_hash": null,
+  "name": "MatZeroTouch",
+  "version": "1.0.0",
+  "description": "A collection of Zero Touch Dynamo nodes.",
+  "group": "",
+  "keywords": [ "ZeroTouch", "dynamo" ],
+  "dependencies": [],
+  "contents": "Zero Touch Nodes - A collection of simple Zero Touch Nodes Dynamo nodes.",
+  "engine_version": "1.0.0",
+  "engine": "dynamo",
+  "engine_metadata": "",
+  "site_url": "",
+  "repository_url": "",
+  "contains_binaries": true,
+  "node_libraries": [
+    "MatZeroTouch, Version=1.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}
