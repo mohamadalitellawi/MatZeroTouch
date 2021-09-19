@@ -120,5 +120,38 @@ namespace MatZeroTouch
             BoundingBox.ToRevitType() > BoundingBoxXYZ
          */
         #endregion
+
+
+        public static IEnumerable<Revit.Elements.Wall> SayHello(string text, double height, Revit.Elements.Level level, Revit.Elements.WallType wallType, int fontSize = 25)
+        {
+            if (level == null)
+            {
+                throw new ArgumentNullException("level");
+            }
+
+            if (wallType == null)
+            {
+                throw new ArgumentNullException("wallType");
+            }
+
+            var lines = TextUtils.TextToLines(text, fontSize);
+
+            var walls = new List<Revit.Elements.Wall>();
+            //elements creation and modification has to be inside of a transaction
+            TransactionManager.Instance.EnsureInTransaction(Document);
+            foreach (var curve in lines)
+            {
+                var wall = Autodesk.Revit.DB.Wall.Create(Document, curve.ToRevitType(), wallType.InternalElement.Id, level.InternalElement.Id, height, 0.0, false, false);
+                walls.Add(wall.ToDSType(false) as Revit.Elements.Wall);
+            }
+            TransactionManager.Instance.TransactionTaskDone();
+
+            return walls;
+        }
+
+        internal static Autodesk.Revit.DB.Document Document
+        {
+            get { return DocumentManager.Instance.CurrentDBDocument; }
+        }
     }
 }
