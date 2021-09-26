@@ -115,5 +115,23 @@ namespace MatZeroTouch
             
         }
 
+
+
+
+        public static Line GetInclinedColumnLineFromAutocad2021(Vector insertShifttVector, double bottomLevel, double topLevel)
+        {
+            Line result;
+            CadHelper.Instance.InitializeAutocad();
+
+            List<AutoCad.Lib.Models.CadPoint> locationPoints  = CadHelper.Instance.GetInclinedColumnLocations();
+
+            using (Point startPoint = Point.ByCoordinates(locationPoints[0].X, locationPoints[0].Y, bottomLevel))
+            using (Point endPoint = Point.ByCoordinates(locationPoints[1].X, locationPoints[1].Y, topLevel))
+            {
+                result = Line.ByStartPointEndPoint(startPoint.Add(insertShifttVector), endPoint.Add(insertShifttVector));
+            }
+
+            return result;
+        }
     }
 }

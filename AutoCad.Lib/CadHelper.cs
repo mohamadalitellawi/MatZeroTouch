@@ -249,7 +249,41 @@ namespace AutoCad.Lib
 			sSet.Delete();
 			return result;
 		}
-		public List<List<CadElement>> GetSelectedCadElements(out List<CadPoint> polylineCenterPoints )
+
+        public List<CadPoint> GetInclinedColumnLocations()
+        {
+			if (_AcadApp is null) throw new CadHandlingException("Can not Access Autocad Program");
+
+			_AcadApp.ActiveDocument.Utility.GetEntity(out object selectedBottomSection, out object pointA, (object)"\nSelect Column Bottom Section Polyline or Circle :");
+			_AcadApp.ActiveDocument.Utility.GetEntity(out object selectedTopSection, out object pointB, (object)"\nSelect Column Top Section Polyline or Circle :");
+
+			AcadEntity cadEntityBottom = (AcadEntity)selectedBottomSection;
+			AcadEntity cadEntityTop = (AcadEntity)selectedTopSection;
+
+			List<CadPoint> result = new List<CadPoint>();
+
+            foreach (var item in new List<AcadEntity> { cadEntityBottom, cadEntityTop })
+            {
+				CadPoint point = new CadPoint(0, 0);
+				switch (item)
+				{
+					case AcadLWPolyline lwPolyLine:
+						point = CalculateAutocadPolylineCenterPointByRegion(lwPolyLine as AcadEntity);
+						break;
+					case AcadPolyline polyLine:
+						point = CalculateAutocadPolylineCenterPointByRegion(polyLine as AcadEntity);
+						break;
+					case AcadCircle circle:
+						point = ParseAcadCircle(circle).CenterPoint;
+						break;
+				}
+				result.Add(point);
+			}
+
+			return result;
+		}
+
+        public List<List<CadElement>> GetSelectedCadElements(out List<CadPoint> polylineCenterPoints )
 		{
 			if (_AcadApp is null) throw new CadHandlingException("Can not Access Autocad Program");
 			polylineCenterPoints = new List<CadPoint>();
