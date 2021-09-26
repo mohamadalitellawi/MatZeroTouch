@@ -133,5 +133,21 @@ namespace MatZeroTouch
 
             return result;
         }
+
+
+
+        public static List<Point> GetCurvesCenterPointsFromAutocad2021(Vector insertShifttVector, bool overrideZ = false, double z = 0)
+        {
+            List<Point> result = new List<Point>();
+            CadHelper.Instance.InitializeAutocad();
+
+            var cadElements = CadHelper.Instance.GetSelected2DPolylineCenterPoints();
+
+            foreach (var p in cadElements)
+            {
+                result.Add(Point.ByCoordinates(p.X,p.Y, overrideZ? z: p.Z).Add(insertShifttVector));
+            }
+            return result;
+        }
     }
 }
