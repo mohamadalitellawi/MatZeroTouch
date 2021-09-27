@@ -34,23 +34,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DynamoServices">
-      <HintPath>..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.3\DynamoServices.dll</HintPath>
+      <HintPath>D:\Program Files\Autodesk\Revit 2021\AddIns\DynamoForRevit\DynamoServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ProtoGeometry">
-      <HintPath>..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\1.3\ProtoGeometry.dll</HintPath>
+      <HintPath>D:\Program Files\Autodesk\Revit 2021\AddIns\DynamoForRevit\ProtoGeometry.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPI">
-      <HintPath>D:\Program Files\Autodesk\Revit 2019\RevitAPI.dll</HintPath>
+      <HintPath>D:\Program Files\Autodesk\Revit 2021\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitNodes">
-      <HintPath>..\..\..\..\..\..\Program Files\Dynamo\Dynamo Revit\1.3\Revit_2019\RevitNodes.dll</HintPath>
+      <HintPath>D:\Program Files\Autodesk\Revit 2021\AddIns\DynamoForRevit\Revit\RevitNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitServices">
-      <HintPath>..\..\..\..\..\..\Program Files\Dynamo\Dynamo Revit\1.3\Revit_2019\RevitServices.dll</HintPath>
+      <HintPath>D:\Program Files\Autodesk\Revit 2021\AddIns\DynamoForRevit\Revit\RevitServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -97,10 +97,10 @@
       <SourceXmls Include="$(TargetDir)*.xml" />
       <SourcePkg Include="pkg.json" />
     </ItemGroup>
-    <RemoveDir Directories="$(AppData)\Dynamo\Dynamo Revit\2.0\packages\$(ProjectName)\bin" />
-    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\1.3\packages\$(ProjectName)\bin\%(RecursiveDir)" />
-    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\1.3\packages\$(ProjectName)\" />
-    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\1.3\packages\$(ProjectName)\bin\" />
-    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\1.3\packages\$(ProjectName)\bin\" />
+    <RemoveDir Directories="$(AppData)\Dynamo\Dynamo Revit\2.6\packages\$(ProjectName)\bin" />
+    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\2.6\packages\$(ProjectName)\bin\%(RecursiveDir)" />
+    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\2.6\packages\$(ProjectName)\" />
+    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\2.6\packages\$(ProjectName)\bin\" />
+    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Dynamo\Dynamo Revit\2.6\packages\$(ProjectName)\bin\" />
   </Target>
 </Project>
