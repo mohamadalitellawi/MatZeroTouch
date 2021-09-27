@@ -72,6 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="pkg.json" />
+    <None Include="Source\AULON64368.zip" />
+    <None Include="Source\AULondon2019HandoutAULON64368.pdf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoCad.Lib\AutoCad.Lib.csproj">
